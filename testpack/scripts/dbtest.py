@@ -25,8 +25,10 @@ class Test1and1Image(Test1and1Common):
 
     def test_docker_logs(self):
         expected_log_lines = [
-            "Executing hook /hooks/supervisord-pre.d/21_cleanup_log_files",
-            "Executing hook /hooks/supervisord-pre.d/40_phpmyadmin_config_secret"
+            "run-parts: executing /hooks/entrypoint-pre.d/01_ssmtp_setup",
+            "run-parts: executing /hooks/entrypoint-pre.d/02_user_group_setup",
+            "Setting: ulimit -c '0'",
+            "run-parts: executing /hooks/supervisord-pre.d/20_configurability"
         ]
         container_logs = self.logs()
         for expected_log_line in expected_log_lines:

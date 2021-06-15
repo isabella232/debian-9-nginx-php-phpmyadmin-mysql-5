@@ -14,7 +14,7 @@ export MYSQL_TABLE_OPEN_CACHE=${MYSQL_TABLE_OPEN_CACHE:-400}
 export MYSQL_SORT_BUFFER_SIZE=${MYSQL_SORT_BUFFER_SIZE:-256K}
 
 # Export memory limit variables and calculate limits
-export_vars=$(cgroup-limits) && export $export_vars || exit 1
+export_vars=$(cgroup-limits 2> /dev/null) && export $export_vars || exit 1
 if [ -n "${NO_MEMORY_LIMIT:-}" -o -z "${MEMORY_LIMIT_IN_BYTES:-}" ]; then
   export MYSQL_KEY_BUFFER_SIZE=${MYSQL_KEY_BUFFER_SIZE:-32M}
   export MYSQL_READ_BUFFER_SIZE=${MYSQL_READ_BUFFER_SIZE:-8M}
